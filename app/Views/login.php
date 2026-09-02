@@ -9,25 +9,35 @@
 <body>
 
     <h1>Login</h1> -->
+<div class="login-wrap">
+    <h1>Sistema de Controle de Serviços</h1>
+    <form class="login-form" method="POST" action="<?= BASE_URL ?>/login">
 
-<form method="POST" action="<?= BASE_URL ?>/login">
+
+        <input
+            type="email"
+            name="email"
+            placeholder="E-mail">
+
+        <input
+            type="password"
+            name="senha"
+            placeholder="Senha">
 
 
-    <input
-        type="email"
-        name="email"
-        placeholder="E-mail">
+        <div class="login-actions">
+            <button
+                type="submit"
+                class="btn-enter">
+                Entrar
+            </button>
 
-    <input
-        type="password"
-        name="senha"
-        placeholder="Senha">
-
-    <button type="submit">
-        Entrar
-    </button>
-
-</form>
+            <a href="<?= BASE_URL ?>/cadastro">
+                Cadastrar usuário
+            </a>
+        </div>
+    </form>
+</div>
 
 <!-- </body>
 

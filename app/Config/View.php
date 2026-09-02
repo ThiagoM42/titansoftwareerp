@@ -10,7 +10,7 @@ class View
 
         ob_start();
 
-        echo ($view);
+        // echo ($view);
         require __DIR__ . '/../Views/' . $view . '.php';
 
         $content = ob_get_clean();

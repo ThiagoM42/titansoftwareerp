@@ -8,7 +8,7 @@ use Config\View;
 
 class LoginController
 {
-    public function index()
+    public function index(): void
     {
 
         View::render('login', [
@@ -17,7 +17,7 @@ class LoginController
     }
 
 
-    public function login()
+    public function login(): void
     {
         $email = $_POST['email'] ?? '';
         $senha = $_POST['senha'] ?? '';
