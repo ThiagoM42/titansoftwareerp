@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS titan_os
+CREATE DATABASE IF NOT EXISTS titan_os_db
     DEFAULT CHARACTER SET utf8mb4
     DEFAULT COLLATE utf8mb4_unicode_ci;
 
-USE titan_os;
+USE titan_os_db;
 
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `services`;
@@ -17,7 +17,7 @@ CREATE TABLE `users` (
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabela de serviços --
 CREATE TABLE `services` (
@@ -31,4 +31,4 @@ CREATE TABLE `services` (
     `service_finished` TIMESTAMP NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
