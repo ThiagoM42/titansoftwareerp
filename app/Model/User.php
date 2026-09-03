@@ -49,7 +49,7 @@ class User
         string $password
     ): bool {
         $sql = "
-            INSERT INTO usuarios (name, email, password)
+            INSERT INTO user (name, email, password)
             VALUES (:name, :email, :password)
         ";
 
@@ -66,7 +66,7 @@ class User
     {
         $sql = "
             SELECT *
-            FROM usuarios
+            FROM user
             WHERE email = :email
             LIMIT 1
         ";
