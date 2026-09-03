@@ -4,12 +4,12 @@ CREATE DATABASE IF NOT EXISTS titan_os_db
 
 USE titan_os_db;
 
-DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `services`;
+DROP TABLE IF EXISTS `users`;
 
 -- Tabela de usuários --
 CREATE TABLE `users` (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE `users` (
 
 -- Tabela de serviços --
 CREATE TABLE `services` (
-    `id_service` INT NOT NULL AUTO_INCREMENT,
+    `id_service` BIGINT(20) NOT NULL AUTO_INCREMENT,
     `description` TEXT,
     `price` DECIMAL(11, 3) NOT NULL,
     `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
