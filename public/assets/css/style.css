@@ -90,3 +90,9 @@ body {
     color: #a42622;
     font-size: .85rem;
 }
+
+/* ############ Dashboard ############ */
+.dashboard {
+    min-height: 100vh;
+    display: flex;
+}
