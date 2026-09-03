@@ -51,6 +51,7 @@ class LoginController
             'email' => $user['email']
         ];
 
-        var_dump($_SESSION['user']);
+        header('Location: ' . BASE_URL . '/dashboard');
+        exit;
     }
 }

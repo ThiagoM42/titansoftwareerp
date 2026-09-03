@@ -15,20 +15,21 @@ CREATE TABLE `users` (
     `password` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `ativo` TINYINT(1) NOT NULL DEFAULT '1',
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabela de serviços --
 CREATE TABLE `services` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(100) NOT NULL,
+    `id_service` INT NOT NULL AUTO_INCREMENT,
     `description` TEXT,
-    `status` ENUM('Pendente', 'Finalizado') NOT NULL DEFAULT 'Pendente',
-    `user_id` INT NOT NULL,
-    `price` DECIMAL(10, 2) NOT NULL,
-    `service_started` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `service_finished` TIMESTAMP NULL DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
+    `price` DECIMAL(11, 3) NOT NULL,
+    `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `finished_at` datetime NULL DEFAULT NULL,
+    `commission_user` DECIMAL(11, 3) NOT NULL,
+    `user_id_user` BIGINT(20) NOT NULL,
+    PRIMARY KEY (`id_service`),
+    FOREIGN KEY (`user_id_user`) REFERENCES `users`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
