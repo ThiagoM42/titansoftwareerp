@@ -78,3 +78,15 @@ body {
 .login-actions a:hover {
     color: #0e4a8a;
 }
+
+.form-error {
+    padding: 10px;
+    margin-bottom: 15px;
+
+    background: #ffe5e5;
+    border: 1px solid #d9534f;
+    border-radius: 3px;
+
+    color: #a42622;
+    font-size: .85rem;
+}

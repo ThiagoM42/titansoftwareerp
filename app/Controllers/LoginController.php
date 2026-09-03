@@ -5,7 +5,7 @@ namespace Controllers;
 require_once __DIR__ . '/../Config/View.php';
 
 use Config\View;
-use Models\User;
+use Model\User;
 
 class LoginController
 {
@@ -23,7 +23,9 @@ class LoginController
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        $userModel = new User();
+        $pdo = (new \BD\Connect())->connect();
+        $userModel = new User($pdo);
+
         $user = $userModel->authenticate(
             $email,
             $password
