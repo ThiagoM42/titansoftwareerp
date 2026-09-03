@@ -6,6 +6,7 @@ require_once __DIR__ . '/../Config/View.php';
 
 use Config\View;
 use Model\User;
+use BD\Connect;
 
 class LoginController
 {
@@ -23,7 +24,7 @@ class LoginController
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        $pdo = (new \BD\Connect())->connect();
+        $pdo = (new Connect())->connect();
         $userModel = new User($pdo);
 
         $user = $userModel->authenticate(
@@ -32,7 +33,13 @@ class LoginController
         );
 
         if (!$user) {
-            echo "E-mail ou senha inválidos.";
+            View::render('login', [
+                'title' => 'Login',
+                'error' => 'E-mail ou senha inválidos.',
+                'old' => [
+                    'email' => $email
+                ]
+            ]);
             return;
         }
 

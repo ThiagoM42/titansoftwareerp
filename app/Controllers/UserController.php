@@ -73,7 +73,11 @@ class UserController
         if ($user->findByEmail($email)) {
             View::render('register', [
                 'title' => 'Cadastrar usuário',
-                'error' => 'Este e-mail já está cadastrado.'
+                'error' => 'Este e-mail já está cadastrado.',
+                'old' => [
+                    'name' => $name,
+                    'email' => $email
+                ]
             ]);
 
             return;
