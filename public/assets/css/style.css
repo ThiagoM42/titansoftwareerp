@@ -96,3 +96,17 @@ body {
     min-height: 100vh;
     display: flex;
 }
+
+.sidebar {
+    width: 133px;
+    min-height: 100vh;
+
+    padding: 28px 13px;
+
+    background: #606060;
+    border-right: 2px solid #2f2f2f;
+
+    color: #fff;
+
+    flex-shrink: 0;
+}
