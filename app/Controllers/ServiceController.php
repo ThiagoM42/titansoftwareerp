@@ -27,15 +27,21 @@ class ServiceController
             header('Location: ' . BASE_URL . '/login');
             exit;
         }
-        $services = (new Service($this->connection))->getAllServices();
-        // funções auxiliares para calcular a comissão total e filtrar os serviços pendentes para evitar conexões desnecessárias com o banco de dados
+
         $id_user = $_SESSION['user']['id_user'];
-        // var_dump($_SESSION['user']['id_user']);
+        // Recebe os filtros de pesquisa do formulário
+        $name = trim($_GET['name'] ?? '');
+        $startDate = $_GET['start_date'] ?? '';
+        $endDate = $_GET['end_date'] ?? '';
+
+        $services = (new Service($this->connection))->getAllServices($name, $startDate, $endDate);
+        // funções auxiliares para calcular a comissão total e filtrar os serviços pendentes para evitar conexões desnecessárias com o banco de dados
         // slice para pegar os últimos 5 serviços cadastrados
         $lastServices = array_slice($services, 0, 5);
         $pendingServices = array_filter($lastServices, fn($lastService) => $lastService['status'] === 'Pendente');
-        // calcula a comissão total dos serviços do usuário logado
-        $comissionTotal = $this->calculateTotalCommission($id_user, $services);
+
+        // calcula a comissão total dos serviços do usuário logado diretamente do banco de dados, pois o filtro recalculava a comissão só com os elementos da pesquisa.
+        $comissionTotal = (new Service($this->connection))->getComissionByUserId($id_user);
 
         View::render('dashboard', [
             'title' => 'Dashboard',
@@ -168,12 +174,5 @@ class ServiceController
         }
 
         return $price * 0.05;
-    }
-
-    private function calculateTotalCommission(int $userId, array $services): float
-    {
-        // Filtra os serviços do usuário logado e calcula a soma das comissões dos serviços finalizados
-        $userServices = array_filter($services, fn($service) => $service['user_id_user'] === (string) $userId && $service['status'] === 'Finalizado');
-        return array_reduce($userServices, fn($total, $service) => $total + (float)$service['commission_user'], 0.0);
     }
 }

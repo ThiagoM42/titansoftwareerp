@@ -67,6 +67,7 @@
             <input
                 type="date"
                 name="start_date"
+
                 value="<?= htmlspecialchars($_GET['start_date'] ?? '') ?>">
 
             <input

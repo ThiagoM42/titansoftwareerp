@@ -25,7 +25,7 @@ document.querySelectorAll('.resolve-button').forEach(button => {
                 })
             });
 
-            console.log('Resposta da requisição:', response);
+            // console.log('Resposta da requisição:', response);
 
             const result = await response.json();
 
