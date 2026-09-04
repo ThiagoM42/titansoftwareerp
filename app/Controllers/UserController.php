@@ -8,13 +8,14 @@ use Model\User;
 
 class UserController
 {
+    // Renderiza a página de cadastro de usuário
     public function create(): void
     {
         View::render('register', [
             'title' => 'Cadastrar usuário'
         ]);
     }
-
+    // Cadastro do usuário
     public function store(): void
     {
         $name = trim($_POST['name'] ?? '');
@@ -85,9 +86,35 @@ class UserController
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        $user->create($name, $email, $passwordHash);
+        try {
+            // retorna o ID do usuário recém-criado
+            $user_id = $user->create($name, $email, $passwordHash);
+        } catch (\Exception $e) {
+            // Se o ID do usuário não for retornado, significa que houve um erro ao cadastrar o usuário
+            View::render('register', [
+                'title' => 'Cadastrar usuário',
+                'error' => 'Erro ao cadastrar usuário. Tente novamente.',
+                'old' => [
+                    'name' => $name,
+                    'email' => $email
+                ]
+            ]);
 
-        header('Location: ' . BASE_URL . '/');
+            return;
+        }
+
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Armazena os dados do usuário na sessão e redireciona para o dashboard
+        $_SESSION['user'] = [
+            'id_user'    => $user_id,
+            'name'  => $name,
+            'email' => $email,
+        ];
+
+        header('Location: ' . BASE_URL . '/dashboard');
         exit;
     }
 }

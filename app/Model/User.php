@@ -48,7 +48,7 @@ class User
         string $name,
         string $email,
         string $password
-    ): bool {
+    ): int {
         $sql = "
             INSERT INTO users (name, email, password)
             VALUES (:name, :email, :password)
@@ -56,11 +56,16 @@ class User
 
         $stmt = $this->connection->prepare($sql);
 
-        return $stmt->execute([
+        $result = $stmt->execute([
             ':name' => $name,
             ':email' => $email,
             ':password' => $password
         ]);
+
+        if (!$result) {
+            throw new \Exception('Erro ao criar usuário.');
+        }
+        return $this->connection->lastInsertId();
     }
 
     public function findByEmail(string $email): array|false

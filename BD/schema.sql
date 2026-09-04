@@ -33,5 +33,5 @@ CREATE TABLE `services` (
     -- Por padrão já define o status como pendente, pois quando o serviço é criado, ele ainda não foi iniciado.
     `status` ENUM('Pendente', 'Finalizado') NOT NULL DEFAULT 'Pendente',
     PRIMARY KEY (`id_service`),
-    FOREIGN KEY (`user_id_user`) REFERENCES `users`(`id`)
+    FOREIGN KEY (`user_id_user`) REFERENCES `users`(`id_user`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
