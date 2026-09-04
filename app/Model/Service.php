@@ -41,4 +41,11 @@ class Service
         $stmt = $this->connection->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function resolveService(int $serviceId): bool
+    {
+        $sql = "UPDATE services SET status = 'Finalizado', finished_at = NOW() WHERE id_service = :id_service";
+        $stmt = $this->connection->prepare($sql);
+        return $stmt->execute([':id_service' => $serviceId]);
+    }
 }

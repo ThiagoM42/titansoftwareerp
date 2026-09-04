@@ -115,6 +115,48 @@ class ServiceController
         exit;
     }
 
+    public function resolve(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASE_URL . '/login');
+            exit;
+        }
+
+        header('Content-Type: application/json; charset=utf-8');
+
+        $serviceId = $_POST['serviceId'] ?? null;
+
+        if ($serviceId === null) {
+            header('Location: ' . BASE_URL . '/dashboard');
+            exit;
+        }
+        try {
+            $service = new Service($this->connection);
+            $service->resolveService((int)$serviceId);
+        } catch (\Exception $e) {
+            // Retorna uma resposta JSON com sucesso falso e a mensagem de erro
+            echo json_encode([
+                'success' => false,
+                'message' => 'Erro ao resolver o serviço: ' . $e->getMessage()
+            ]);
+            exit;
+        }
+        // se tudo correr bem, retorna uma resposta JSON com sucesso verdadeiro e a URL de redirecionamento
+        echo json_encode([
+            'success' => true,
+            'message' => 'Serviço resolvido com sucesso.',
+            'redirect' => BASE_URL . '/dashboard'
+        ]);
+
+
+        // header('Location: ' . BASE_URL . '/dashboard');
+        // exit;
+    }
+
     private function calculateCommission(float $price): float
     {
         if ($price > 10000) {
@@ -131,7 +173,7 @@ class ServiceController
     private function calculateTotalCommission(int $userId, array $services): float
     {
         // Filtra os serviços do usuário logado e calcula a soma das comissões dos serviços finalizados
-        $userServices = array_filter($services, fn($service) => $service['user_id_user'] === $userId && isset($service['finished_at']));
-        return array_reduce($userServices, fn($total, $service) => $total + (float)$service['commission'], 0.0);
+        $userServices = array_filter($services, fn($service) => $service['user_id_user'] === (string) $userId && $service['status'] === 'Finalizado');
+        return array_reduce($userServices, fn($total, $service) => $total + (float)$service['commission_user'], 0.0);
     }
 }

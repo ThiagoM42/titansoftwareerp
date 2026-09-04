@@ -52,6 +52,32 @@
                 <p style="border: 1px solid #000; padding: 10px;">R$ <?= number_format($comissionTotal, 2, ',', '.') ?></p>
             </div>
         </section>
+
+        <!-- FILTROS DE PESQUISA -->
+        <form
+            class="dashboard-filters"
+            action="<?= BASE_URL ?>/dashboard"
+            method="GET">
+            <input
+                type="text"
+                name="name"
+                placeholder="Nome"
+                value="<?= htmlspecialchars($_GET['name'] ?? '') ?>">
+
+            <input
+                type="date"
+                name="start_date"
+                value="<?= htmlspecialchars($_GET['start_date'] ?? '') ?>">
+
+            <input
+                type="date"
+                name="end_date"
+                value="<?= htmlspecialchars($_GET['end_date'] ?? '') ?>">
+
+            <button type="submit">
+                Filtrar
+            </button>
+        </form>
         <!-- TABELA DE SERVIÇOS -->
         <section class="services-table-wrapper">
             <table class="services-table">
@@ -75,7 +101,13 @@
                                 <td><?= htmlspecialchars($service['employee']) ?></td>
                                 <td><?= htmlspecialchars($service['status']) ?></td>
                                 <td>
-                                    <a href="<?= BASE_URL ?>/servicos/resolve/<?= $service['id_service'] ?>" onclick="return confirm('Tem certeza que deseja resolver este serviço?')">Resolver</a>
+                                    <!-- <a href="<?= BASE_URL ?>/servicos/resolve/<?= $service['id_service'] ?>" onclick="return confirm('Tem certeza que deseja resolver este serviço?')">Resolver</a>
+                                      -->
+                                    <?php if ($service['status'] === 'Pendente'): ?>
+                                        <button class="resolve-button" data-service-id="<?= $service['id_service'] ?>" data-service-url="<?= BASE_URL ?>/servicos/resolve">Resolver</button>
+                                    <?php else: ?>
+                                        <span>Finalizado</span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

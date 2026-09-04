@@ -21,5 +21,5 @@ $router->post('/cadastro', [UserController::class, 'store']);
 $router->get('/dashboard', [ServiceController::class, 'index']);
 $router->get('/servicos/cadastrar-servico', [ServiceController::class, 'create']);
 $router->post('/servicos/cadastrar-servico', [ServiceController::class, 'store']);
-
+$router->post('/servicos/resolve', [ServiceController::class, 'resolve']);
 $router->run();
