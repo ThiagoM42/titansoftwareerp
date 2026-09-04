@@ -7,7 +7,7 @@
         </div>
 
         <nav class="sidebar-menu">
-            <a href="<?= BASE_URL ?>/servicos/cadastrar">
+            <a href="<?= BASE_URL ?>/servicos/cadastrar-servico">
                 Cadastrar Serviço
             </a>
         </nav>
