@@ -46,7 +46,7 @@ class LoginController
         session_start();
 
         $_SESSION['user'] = [
-            'id' => $user['id'],
+            'id_user' => $user['id_user'],
             'name' => $user['name'],
             'email' => $user['email']
         ];

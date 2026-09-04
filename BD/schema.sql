@@ -9,14 +9,14 @@ DROP TABLE IF EXISTS `users`;
 
 -- Tabela de usuários --
 CREATE TABLE `users` (
-    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `id_user` BIGINT(20) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `ativo` TINYINT(1) NOT NULL DEFAULT '1',
-    PRIMARY KEY (`id`),
+    PRIMARY KEY (`id_user`),
     UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

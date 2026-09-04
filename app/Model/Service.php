@@ -36,8 +36,8 @@ class Service
     }
 
     public function getAllServices(): array
-    {
-        $sql = "SELECT * FROM services";
+    {   // Join necessário para obter o nome do funcionário associado a cada serviço, usando o user_id_user como chave estrangeira.
+        $sql = "SELECT services.*, users.name AS employee FROM services JOIN users ON services.user_id_user = users.id_user ORDER BY id_service DESC";
         $stmt = $this->connection->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -98,7 +98,7 @@ class ServiceController
             return;
         }
 
-        $userId = $_SESSION['user']['id'];
+        $userId = $_SESSION['user']['id_user'];
 
         $service = new Service($this->connection);
         $commission = $this->calculateCommission((float) $price);

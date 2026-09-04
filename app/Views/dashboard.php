@@ -23,7 +23,7 @@
                     <?php if (!empty($services)): ?>
                         <?php foreach ($services as $service): ?>
                             <li>
-                                <strong><?= $service['id_service'] ?></strong>
+                                <strong><?= $service['id_service'] ?></strong> -
                                 <strong><?= htmlspecialchars($service['description']) ?></strong>
                             </li>
                         <?php endforeach; ?>
@@ -38,8 +38,8 @@
                     <?php if (!empty($pendingServices)): ?>
                         <?php foreach ($pendingServices as $service): ?>
                             <li>
+                                <strong><?= $service['id_service'] ?></strong> -
                                 <strong><?= htmlspecialchars($service['description']) ?></strong>
-                                <span>R$ <?= number_format($service['price'], 2, ',', '.') ?></span>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -50,13 +50,14 @@
         </section>
         <!-- TABELA DE SERVIÇOS -->
         <section class="services-table-wrapper">
-            <table>
+            <table class="services-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>DESCRIÇÃO</th>
                         <th>VALOR</th>
                         <th>STATUS</th>
+                        <th>FUNCIONÁRIO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +68,7 @@
                                 <td><?= htmlspecialchars($service['description']) ?></td>
                                 <td>R$ <?= number_format($service['price'], 2, ',', '.') ?></td>
                                 <td><?= htmlspecialchars($service['status']) ?></td>
+                                <td><?= htmlspecialchars($service['employee']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
