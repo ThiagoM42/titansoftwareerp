@@ -35,3 +35,23 @@ CREATE TABLE `services` (
     PRIMARY KEY (`id_service`),
     FOREIGN KEY (`user_id_user`) REFERENCES `users`(`id_user`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- Todos usuários tenha a senha --> senha123
+INSERT INTO users ( name, email, password)
+    VALUES
+(
+    'Caneta Azul',
+    'caneta@email.com',
+    '$2y$10$sjKGzsS2Um.aG8HMVUPPEexhDhvLicV9Hj6Vd93pde9XSjsC27gP2'
+),
+(
+    'Vini Junior',
+    'vini@email.com',
+    '$2y$10$sjKGzsS2Um.aG8HMVUPPEexhDhvLicV9Hj6Vd93pde9XSjsC27gP2'
+),
+(
+    'Luva de Pedreiro',
+    'luva@email.com',
+    '$2y$10$sjKGzsS2Um.aG8HMVUPPEexhDhvLicV9Hj6Vd93pde9XSjsC27gP2'
+);

@@ -19,6 +19,7 @@ $router->post('/login', [LoginController::class, 'login']);
 $router->get('/cadastro', [UserController::class, 'create']);
 $router->post('/cadastro', [UserController::class, 'store']);
 $router->get('/dashboard', [ServiceController::class, 'index']);
+$router->get('/logout', [LoginController::class, 'logout']);
 $router->get('/servicos/cadastrar-servico', [ServiceController::class, 'create']);
 $router->post('/servicos/cadastrar-servico', [ServiceController::class, 'store']);
 $router->post('/servicos/resolve', [ServiceController::class, 'resolve']);

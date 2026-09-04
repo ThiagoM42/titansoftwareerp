@@ -54,4 +54,12 @@ class LoginController
         header('Location: ' . BASE_URL . '/dashboard');
         exit;
     }
+
+    public function logout(): void
+    {
+        session_start();
+        session_destroy();
+        header('Location: ' . BASE_URL . '/');
+        exit;
+    }
 }

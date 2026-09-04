@@ -10,6 +10,10 @@
             <a href="<?= BASE_URL ?>/servicos/cadastrar-servico">
                 Cadastrar Serviço
             </a>
+            
+            <a href="<?= BASE_URL ?>/logout">
+                Sair
+            </a>
         </nav>
 
     </aside>

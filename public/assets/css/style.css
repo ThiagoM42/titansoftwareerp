@@ -133,6 +133,9 @@ body {
 
 .sidebar-menu {
     margin-top: 43px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .sidebar-menu a {
