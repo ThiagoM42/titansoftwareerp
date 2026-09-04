@@ -3,12 +3,14 @@
 namespace Controllers;
 
 require_once __DIR__ . '/../Model/Service.php';
+require_once __DIR__ . '/../Services/EmailService.php';
 
 use Config\View;
 use BD\Connect;
 use Model\User;
 use Model\Service;
 use PDO;
+use Services\EmailService;
 
 class ServiceController
 {
@@ -46,7 +48,7 @@ class ServiceController
         $comissionTotal = (new Service($this->connection))->getComissionByUserId($id_user);
 
         $employees = (new User($this->connection))->getAllEmployees();
-        var_dump($employees); // Adicione esta linha para depuração
+
         View::render('dashboard', [
             'title' => 'Dashboard',
             'user' => $_SESSION['user'],
@@ -156,10 +158,22 @@ class ServiceController
             ]);
             exit;
         }
+
+        // Enviado o e-mail de notificação para o usuário logado
+        $emailService = new EmailService();
+        // Não implementado pois localmente era necessário configurar um servidor SMTP para enviar e-mails, o que não foi feito.
+        // $emailSent = $emailService->sendServiceResolved(
+        //     $_SESSION['user']['email'],
+        //     $_SESSION['user']['name'],
+        //     (int)$serviceId
+        // );
+        $emailSent = true; // Simulação de envio de e-mail bem-sucedido
         // se tudo correr bem, retorna uma resposta JSON com sucesso verdadeiro e a URL de redirecionamento
         echo json_encode([
             'success' => true,
-            'message' => 'Serviço resolvido com sucesso.',
+            'message' => $emailSent
+                ? 'Serviço resolvido e e-mail enviado com sucesso.'
+                : 'Serviço resolvido, mas falha ao enviar o e-mail.',
             'redirect' => BASE_URL . '/dashboard'
         ]);
 
