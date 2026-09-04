@@ -17,7 +17,7 @@ class ServiceController
             header('Location: ' . BASE_URL . '/login');
             exit;
         }
-        // Render the service view
+
         View::render('dashboard', [
             'title' => 'DashBoard',
             'user' => $_SESSION['user']
