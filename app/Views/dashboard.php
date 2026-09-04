@@ -47,6 +47,10 @@
                     <?php endif; ?>
                 </ul>
             </div>
+            <div class="summary-column">
+                <h2>Comissão pelos serviços</h2>
+                <p style="border: 1px solid #000; padding: 10px;">R$ <?= number_format($comissionTotal, 2, ',', '.') ?></p>
+            </div>
         </section>
         <!-- TABELA DE SERVIÇOS -->
         <section class="services-table-wrapper">
@@ -56,8 +60,9 @@
                         <th>ID</th>
                         <th>DESCRIÇÃO</th>
                         <th>VALOR</th>
-                        <th>STATUS</th>
                         <th>FUNCIONÁRIO</th>
+                        <th>STATUS</th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,8 +72,11 @@
                                 <td><?= $service['id_service'] ?></td>
                                 <td><?= htmlspecialchars($service['description']) ?></td>
                                 <td>R$ <?= number_format($service['price'], 2, ',', '.') ?></td>
-                                <td><?= htmlspecialchars($service['status']) ?></td>
                                 <td><?= htmlspecialchars($service['employee']) ?></td>
+                                <td><?= htmlspecialchars($service['status']) ?></td>
+                                <td>
+                                    <a href="<?= BASE_URL ?>/servicos/resolve/<?= $service['id_service'] ?>" onclick="return confirm('Tem certeza que deseja resolver este serviço?')">Resolver</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>

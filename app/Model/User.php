@@ -18,7 +18,7 @@ class User
     public function authenticate(string $email, string $password)
     {
         $sql = "
-            SELECT id, name, email, password
+            SELECT id_user, name, email, password
             FROM users
             WHERE email = :email
             LIMIT 1

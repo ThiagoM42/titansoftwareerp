@@ -88,7 +88,7 @@ class UserController
 
         try {
             // retorna o ID do usuário recém-criado
-            $user_id = $user->create($name, $email, $passwordHash);
+            $id_user = $user->create($name, $email, $passwordHash);
         } catch (\Exception $e) {
             // Se o ID do usuário não for retornado, significa que houve um erro ao cadastrar o usuário
             View::render('register', [
@@ -109,7 +109,7 @@ class UserController
         }
         // Armazena os dados do usuário na sessão e redireciona para o dashboard
         $_SESSION['user'] = [
-            'id_user'    => $user_id,
+            'id_user'    => $id_user,
             'name'  => $name,
             'email' => $email,
         ];

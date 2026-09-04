@@ -148,9 +148,11 @@ body {
 
 .dashboard-summary {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 100px;
     margin-bottom: 35px;
+    /* background: red; */
 }
 
 .summary-column h2 {
@@ -158,12 +160,17 @@ body {
     margin-bottom: 18px;
 }
 
+/* .summary-column {
+    background: blue;
+} */
+
 .summary-column ul {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 12px;
     font-size: .78rem;
+
 }
 
 /* ############ formulário de serviço ############ */
@@ -266,4 +273,9 @@ body {
 .services-table th:nth-child(4),
 .services-table td:nth-child(4) {
     width: 22%;
+}
+
+.services-table th:nth-child(5),
+.services-table td:nth-child(5) {
+    width: 30%;
 }
