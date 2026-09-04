@@ -85,4 +85,18 @@ class User
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getAllEmployees(): array
+    {
+        $sql = "
+            SELECT id_user, name, email
+            FROM users
+            ORDER BY name ASC
+        ";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

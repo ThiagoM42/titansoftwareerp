@@ -61,9 +61,33 @@
             <input
                 type="text"
                 name="name"
-                placeholder="Nome"
+                placeholder="Nome do serviço"
                 value="<?= htmlspecialchars($_GET['name'] ?? '') ?>">
 
+            <!-- <input
+                type="text"
+                name="employee_name"
+                placeholder="Nome do funcionário"
+                value="<?= htmlspecialchars($_GET['employee_name'] ?? '') ?>"> -->
+
+            <select name="employee_id">
+                <option value="">
+                    Todos os funcionários
+                </option>
+
+                <?php foreach ($employees ?? [] as $employee): ?>
+
+                    <option
+                        value="<?= $employee['id_user'] ?>"
+                        <?= ($_GET['employee_id'] ?? '') == $employee['id_user']
+                            ? 'selected'
+                            : '' ?>>
+                        <?= htmlspecialchars($employee['name']) ?>
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
             <input
                 type="date"
                 name="start_date"

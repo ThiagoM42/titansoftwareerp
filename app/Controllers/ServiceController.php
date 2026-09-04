@@ -6,6 +6,7 @@ require_once __DIR__ . '/../Model/Service.php';
 
 use Config\View;
 use BD\Connect;
+use Model\User;
 use Model\Service;
 use PDO;
 
@@ -31,10 +32,11 @@ class ServiceController
         $id_user = $_SESSION['user']['id_user'];
         // Recebe os filtros de pesquisa do formulário
         $name = trim($_GET['name'] ?? '');
+        $employeeId = $_GET['employee_id'] ?? '';
         $startDate = $_GET['start_date'] ?? '';
         $endDate = $_GET['end_date'] ?? '';
 
-        $services = (new Service($this->connection))->getAllServices($name, $startDate, $endDate);
+        $services = (new Service($this->connection))->getAllServices($name, $employeeId, $startDate, $endDate);
         // funções auxiliares para calcular a comissão total e filtrar os serviços pendentes para evitar conexões desnecessárias com o banco de dados
         // slice para pegar os últimos 5 serviços cadastrados
         $lastServices = array_slice($services, 0, 5);
@@ -43,12 +45,15 @@ class ServiceController
         // calcula a comissão total dos serviços do usuário logado diretamente do banco de dados, pois o filtro recalculava a comissão só com os elementos da pesquisa.
         $comissionTotal = (new Service($this->connection))->getComissionByUserId($id_user);
 
+        $employees = (new User($this->connection))->getAllEmployees();
+        var_dump($employees); // Adicione esta linha para depuração
         View::render('dashboard', [
             'title' => 'Dashboard',
             'user' => $_SESSION['user'],
             'services' => $services,
             'pendingServices' => $pendingServices,
-            'comissionTotal' => $comissionTotal
+            'comissionTotal' => $comissionTotal,
+            'employees' => $employees
         ]);
     }
 

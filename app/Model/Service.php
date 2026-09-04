@@ -35,12 +35,16 @@ class Service
         ]);
     }
 
-    public function getAllServices(string $name = '', string $startDate = '', string $endDate = ''): array
+    public function getAllServices(string $name = '', string $employeeId = '', string $startDate = '', string $endDate = ''): array
     {   // Join necessário para obter o nome do funcionário associado a cada serviço, usando o user_id_user como chave estrangeira.
         $sql = "SELECT services.*, users.name AS employee FROM services JOIN users ON services.user_id_user = users.id_user WHERE 1=1";
 
         if ($name !== '') {
             $sql .= " AND services.description LIKE :name";
+        }
+
+        if ($employeeId !== '') {
+            $sql .= " AND services.user_id_user = :employee_id";
         }
 
         if ($startDate !== '') {
@@ -57,6 +61,10 @@ class Service
 
         if ($name !== '') {
             $stmt->bindValue(':name', "%$name%");
+        }
+
+        if ($employeeId !== '') {
+            $stmt->bindValue(':employee_id', $employeeId);
         }
 
         if ($startDate !== '') {
