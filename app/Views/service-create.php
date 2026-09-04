@@ -10,16 +10,19 @@
 
         <form action="<?= BASE_URL ?>/servicos/cadastrar-servico" method="POST" class="service-form">
             <div class="form-group">
-                <label for="name">Nome do Serviço:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="description">Descrição do Serviço:</label>
+                <input type="text" id="description" name="description" value="<?= htmlspecialchars($old['description'] ?? '') ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="price">Preço do Serviço:</label>
-                <input type="number" id="price" name="price" step="0.01" required>
+                <input type="number" id="price" name="price" value="<?= htmlspecialchars($old['price'] ?? '') ?>" step="0.01" required>
             </div>
 
-            <button type="submit">Cadastrar Serviço</button>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button type="submit">Cadastrar Serviço</button>
+                <a href="<?= BASE_URL ?>/dashboard" class="cancel-button">Cancelar</a>
+            </div>
         </form>
     </div>
 </div>

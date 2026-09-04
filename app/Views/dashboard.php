@@ -23,8 +23,8 @@
                     <?php if (!empty($services)): ?>
                         <?php foreach ($services as $service): ?>
                             <li>
-                                <strong><?= htmlspecialchars($service['name']) ?></strong>
-                                <span>R$ <?= number_format($service['price'], 2, ',', '.') ?></span>
+                                <strong><?= $service['id_service'] ?></strong>
+                                <strong><?= htmlspecialchars($service['description']) ?></strong>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -38,7 +38,7 @@
                     <?php if (!empty($pendingServices)): ?>
                         <?php foreach ($pendingServices as $service): ?>
                             <li>
-                                <strong><?= htmlspecialchars($service['name']) ?></strong>
+                                <strong><?= htmlspecialchars($service['description']) ?></strong>
                                 <span>R$ <?= number_format($service['price'], 2, ',', '.') ?></span>
                             </li>
                         <?php endforeach; ?>
@@ -48,27 +48,30 @@
                 </ul>
             </div>
         </section>
-        <section>
+        <!-- TABELA DE SERVIÇOS -->
+        <section class="services-table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th>Serviço</th>
-                        <th>Preço</th>
-                        <th>Status</th>
+                        <th>ID</th>
+                        <th>DESCRIÇÃO</th>
+                        <th>VALOR</th>
+                        <th>STATUS</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (!empty($services)): ?>
                         <?php foreach ($services as $service): ?>
                             <tr>
-                                <td><?= htmlspecialchars($service['name']) ?></td>
+                                <td><?= $service['id_service'] ?></td>
+                                <td><?= htmlspecialchars($service['description']) ?></td>
                                 <td>R$ <?= number_format($service['price'], 2, ',', '.') ?></td>
                                 <td><?= htmlspecialchars($service['status']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="3">Nenhum serviço cadastrado.</td>
+                            <td colspan="4">Nenhum serviço cadastrado.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

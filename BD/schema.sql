@@ -30,6 +30,8 @@ CREATE TABLE `services` (
     `finished_at` datetime NULL DEFAULT NULL,
     `commission_user` DECIMAL(11, 3) NOT NULL,
     `user_id_user` BIGINT(20) NOT NULL,
+    -- Por padrão já define o status como pendente, pois quando o serviço é criado, ele ainda não foi iniciado.
+    `status` ENUM('Pendente', 'Finalizado') NOT NULL DEFAULT 'Pendente',
     PRIMARY KEY (`id_service`),
     FOREIGN KEY (`user_id_user`) REFERENCES `users`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -216,3 +216,16 @@ body {
 .service-form button:hover {
     background: #363636;
 }
+
+/* ############# tabela de serviços ############ */
+
+.services-table-wrapper {
+    border: 1.5px solid #333;
+    padding: 6px 8px 55px;
+}
+
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .8rem;
+}
